@@ -1,6 +1,9 @@
-typedef struct{
+#ifndef __DLIST_H
+#define __DLIST_H
+
+typedef struct type{
 	void *data;
-	void *next,*previous;
+	struct type *next,*previous;
 } node;
 typedef struct{
 	int length;
@@ -9,6 +12,8 @@ typedef struct{
 
 DoubleList* create();
 node* createNode(void* prevAddress,void* nextAddress);
-int add(DoubleList* dList,int index,void *element);
-int remove(DoubleList* dList,int index);
+int insert(DoubleList* dList,int index,void *element);
+int delete(DoubleList* dList,int index);
 int findIndex(DoubleList* dList,void *element);
+
+#endif
