@@ -119,6 +119,16 @@ int main(){
 		test_add_struct_in_between_list();
 	tearDown();
 	testEnded();
+	testStarted("test_delete_first_element_on_struct");
+	setup();
+		test_delete_first_element_on_struct();
+	tearDown();
+	testEnded();
+	testStarted("test_delete_last_element_on_struct");
+	setup();
+		test_delete_last_element_on_struct();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

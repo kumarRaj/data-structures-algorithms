@@ -182,9 +182,9 @@ void test_delete_first_element_on_struct(){
 	ASSERT(2 == dlist->length);
 	ASSERT(cmpAccount(acc2,*(Account*)dlist->head->data));
 }
-void test_delete_last_element(){
+void test_delete_last_element_on_struct(){
 	DoubleList* dlist = create();
-	Account acc1 = 5,acc2 = 9,acc3 = 65;
+	Account acc1 = {5,45},acc2 = {9,56},acc3 = {65,89};
 	node *second,*third;
 	insert(dlist, 0, &acc1);
 	insert(dlist, 1, &acc2);
