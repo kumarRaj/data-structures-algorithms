@@ -2,7 +2,7 @@
 #include "dList.h"
 #include <stdlib.h>
 #include <stdio.h>
-// #include <stdio.h>
+#include <string.h>
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 void view_list_details(DoubleList *dlist){
@@ -79,7 +79,6 @@ void test_add_data_in_between_list(){
 	second = dlist->head->next;
 	third = second->next;
 	fourth = third->next;
-	// view_list_details(dlist);
 	ASSERT(5 == *(int*)dlist->head->data);
 	ASSERT(17 == *(int*)second->data);
 	ASSERT(9 == *(int*)third->data);
@@ -139,4 +138,37 @@ void test_find_index_gives_index_of_element(){
 	insert(dlist, 2, &number5);
 	ASSERT(2 == findIndex(dlist, &number5));
 	// view_list_details(dlist);
+}
+typedef struct{
+	int accno;
+	int balance;
+} Account;
+int cmpAccount(Account expected,Account actual){
+	return (expected.accno == actual.accno 
+				&& expected.balance == actual.balance);
+}
+void test_insert_struct_in_list_starting(){
+	DoubleList* dlist = create();
+	Account acc1 = {5,4000};
+	insert(dlist, 0, &acc1);
+	ASSERT(&acc1 == dlist->head->data);
+	ASSERT(cmpAccount(acc1, *(Account*)dlist->head->data));
+	ASSERT(dlist->length == 1);	
+}
+void test_add_struct_in_between_list(){
+	DoubleList* dlist = create();
+	Account acc0 = {5,450},acc2 = {9,456},acc3 = {6,455},acc1 = {1,445};
+	node *second,*third,*fourth;
+	insert(dlist, 0, &acc0);
+	insert(dlist, 1, &acc2);
+	insert(dlist, 2, &acc3);
+	insert(dlist, 1, &acc1);
+	second = dlist->head->next;
+	third = second->next;
+	fourth = third->next;
+	ASSERT(cmpAccount(acc0,*(Account*)dlist->head->data));
+	ASSERT(cmpAccount(acc1,*(Account*)second->data));
+	ASSERT(cmpAccount(acc2,*(Account*)third->data));
+	ASSERT(cmpAccount(acc3,*(Account*)fourth->data));
+	
 }

@@ -109,6 +109,16 @@ int main(){
 		test_find_index_gives_index_of_element();
 	tearDown();
 	testEnded();
+	testStarted("test_insert_struct_in_list_starting");
+	setup();
+		test_insert_struct_in_list_starting();
+	tearDown();
+	testEnded();
+	testStarted("test_add_struct_in_between_list");
+	setup();
+		test_add_struct_in_between_list();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
