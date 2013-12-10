@@ -169,6 +169,27 @@ void test_add_struct_in_between_list(){
 	ASSERT(cmpAccount(acc0,*(Account*)dlist->head->data));
 	ASSERT(cmpAccount(acc1,*(Account*)second->data));
 	ASSERT(cmpAccount(acc2,*(Account*)third->data));
-	ASSERT(cmpAccount(acc3,*(Account*)fourth->data));
-	
+	ASSERT(cmpAccount(acc3,*(Account*)fourth->data));	
+}
+void test_delete_first_element_on_struct(){
+	DoubleList* dlist = create();
+	Account acc1 = {5,45},acc2 = {9,56},acc3 = {65,89};
+	node *second,*third;
+	insert(dlist, 0, &acc1);
+	insert(dlist, 1, &acc2);
+	insert(dlist, 2, &acc3);
+	ASSERT(delete(dlist, 0));
+	ASSERT(2 == dlist->length);
+	ASSERT(cmpAccount(acc2,*(Account*)dlist->head->data));
+}
+void test_delete_last_element(){
+	DoubleList* dlist = create();
+	Account acc1 = 5,acc2 = 9,acc3 = 65;
+	node *second,*third;
+	insert(dlist, 0, &acc1);
+	insert(dlist, 1, &acc2);
+	insert(dlist, 2, &acc3);
+	ASSERT(delete(dlist, 2));
+	ASSERT(2 == dlist->length);
+	ASSERT(NULL == dlist->head->next->next);
 }
