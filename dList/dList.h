@@ -8,7 +8,7 @@ typedef struct{
 } DoubleList;
 
 DoubleList* create();
-node* createNode(void* prevAddress,void* nextAddress);
+node* createNode(void* prevAddress,void *data,void* nextAddress);
 int insert(DoubleList* dList,int index,void *element);
 int delete(DoubleList* dList,int index);
 int findIndex(DoubleList* dList,void *element);

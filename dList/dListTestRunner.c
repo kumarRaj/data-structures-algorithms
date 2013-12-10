@@ -104,6 +104,11 @@ int main(){
 		test_delete_element_in_between();
 	tearDown();
 	testEnded();
+	testStarted("test_find_index_gives_index_of_element");
+	setup();
+		test_find_index_gives_index_of_element();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

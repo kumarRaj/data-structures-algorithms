@@ -9,16 +9,18 @@ void view_list_details(DoubleList *dlist){
 	node *temp;int i;
 	printf("\n\n");
 	temp = dlist->head;
-	for (i = 0; i < dlist->length;temp = temp->next){
-		printf("%p--\t%d--\t%p\n",temp->previous,*(int*)temp->data,temp->next );
+	for (i = 0; i < dlist->length;i++){
+		printf("%d--\t\n",*(int*)temp->data);
+		temp = temp->next;
 	}
 }
 
 void test_create_node(){
 	node expected = {NULL,NULL,NULL};
-	node *actual = createNode(NULL,NULL);
+	node *actual = createNode(NULL,NULL,NULL);
 	ASSERT(expected.next == actual->next);
 	ASSERT(expected.previous == actual->previous);
+	ASSERT(expected.data == actual->data);
 }
 void test_create_double_list(){
 	DoubleList* dlist = create();
@@ -123,5 +125,18 @@ void test_delete_element_in_between(){
 	insert(dlist, 1, &number2);
 	insert(dlist, 2, &number3);
 	ASSERT(delete(dlist, 1));
+	ASSERT(2 == dlist->length);
 	ASSERT(65 == *(int*)dlist->head->next->data);
+}
+void test_find_index_gives_index_of_element(){
+	DoubleList* dlist = create();
+	int number1 = 5,number2 = 9,number3 = 65,number4 = 45,number5 = 90;
+	node *second,*third;
+	insert(dlist, 0, &number1);
+	insert(dlist, 1, &number2);
+	insert(dlist, 2, &number3);
+	insert(dlist, 2, &number4);
+	insert(dlist, 2, &number5);
+	ASSERT(2 == findIndex(dlist, &number5));
+	// view_list_details(dlist);
 }
