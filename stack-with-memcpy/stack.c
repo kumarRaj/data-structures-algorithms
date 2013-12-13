@@ -1,11 +1,10 @@
-#include "./include/stack.h"
+#include "stack.h"
 #include <stdlib.h>
 void* getElement(Stack *stack){
 	return (stack->base + ((stack->top) * stack->elementSize));
 }
 Stack* create(int elementSize,int length){
-	Stack *stack;
-	stack = malloc(sizeof(Stack));
+	Stack *stack = calloc(sizeof(Stack),1);
 	stack->base = calloc(length, elementSize);
 	stack->length = length;
 	stack->elementSize = elementSize;
@@ -13,7 +12,14 @@ Stack* create(int elementSize,int length){
 	return stack;
 };
 bool push(Stack *stack,void* element){
-	if(isFull(stack)) return false;
+	void *temp;
+	if(isFull(stack)){
+		temp = realloc(stack->base,(stack->length * stack->elementSize));
+		if(!temp)
+			return false;
+		stack->base = temp;
+		stack->length = stack->length * 2;
+	} 
 	stack->top++;
 	memcpy(getElement(stack), element, stack->elementSize);
 	return true;
@@ -34,8 +40,4 @@ bool isEmpty(Stack *stack){
 }
 bool isFull(Stack *stack){
 	return (stack->length == (stack->top + 1));
-}
-void dispose(Stack *stack){
-	free(stack->base);
-	free(stack);
 }

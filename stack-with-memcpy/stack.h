@@ -15,4 +15,3 @@ void* pop(Stack *stack);
 void* peek(Stack *stack);
 bool isEmpty(Stack *stack);
 bool isFull(Stack *stack);
-void dispose(Stack *stack);
