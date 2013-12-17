@@ -2,6 +2,17 @@
 #include "priorityQ.h"
 
 PQueue *queue;
+void view_priority_queue_details(DoubleList *dlist){
+    node *temp;int i;
+    Queue_element *element;
+    temp = dlist->head;
+    for (i = 0; i < dlist->length;i++){
+        element = temp->data;
+        printf("-%d-\t",*(int*)element->data);
+        temp = temp->next;
+    }
+    printf("\n\n");
+}
 
 int comparePriority(void *element1,void *element2){
     Queue_element el1 = *(Queue_element*)element1;
@@ -15,7 +26,6 @@ void test_adds_the_element_at_the_starting_of_queue(){
     Queue_element element = {&num,5};
     queue = create_queue();
     ASSERT(enqueue(queue, &element,comparePriority));
-
 }
 
 void test_adds_the_element_first_having_lower_priority(){
@@ -61,6 +71,6 @@ void test_remove_element_from_queue(){
     dequeue(queue);
     first = *(Queue_element*)queue->head->data; 
     second = *(Queue_element*)queue->head->next->data; 
-    ASSERT(34 == *(int*)first.data);
+    ASSERT(56 == *(int*)first.data);
     ASSERT(25 == *(int*)second.data);
 }

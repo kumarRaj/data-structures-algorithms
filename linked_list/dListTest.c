@@ -7,14 +7,13 @@
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 void view_list_details(DoubleList *dlist){
 	node *temp;int i;
-	printf("\n\n");
 	temp = dlist->head;
 	for (i = 0; i < dlist->length;i++){
-		printf("%d--\t\n",*(int*)temp->data);
+		printf("-%d-\t",*(int*)temp->data);
 		temp = temp->next;
 	}
+	printf("\n\n");
 }
-
 void test_create_node(){
 	node expected = {NULL,NULL,NULL};
 	node *actual = createNode(NULL,NULL,NULL);
@@ -52,6 +51,24 @@ void test_add_multiple_data_to_end_of_list(){
 	ASSERT(65 == *(int*)third->data);
 	ASSERT(dlist->length == 3);
 	ASSERT(dlist->head == second->previous);
+}
+void test_add_multiple_data_to_start_of_list(){
+	DoubleList* dlist = create();
+	int number1 = 5,number2 = 9,number3 = 65;
+	node *second,*third;
+	insert(dlist, 0, &number1);
+	insert(dlist, 0, &number2);
+	insert(dlist, 0, &number3);
+	view_list_details(dlist);
+	delete(dlist, 0);
+	view_list_details(dlist);
+	delete(dlist, 0);
+	view_list_details(dlist);
+	// second = dlist->head->next;
+	// third = second->next;
+	// // ASSERT(5 == *(int*)dlist->head->data);
+	// // ASSERT(9 == *(int*)second->data);
+	// // ASSERT(65 == *(int*)third->data);
 }
 void test_add_data_in_beginning_of_list_with_values(){
 	int number1 = 5,number2 = 9,number0 = 65;

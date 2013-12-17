@@ -9,5 +9,5 @@ int enqueue(PQueue *queue, Queue_element *element, compare fun){
 }
 
 int dequeue(PQueue *queue){
-	return delete(queue, 1);
+	return delete(queue, 0);
 }

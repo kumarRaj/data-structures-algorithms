@@ -69,6 +69,11 @@ int main(){
 		test_add_multiple_data_to_end_of_list();
 	tearDown();
 	testEnded();
+	testStarted("test_add_multiple_data_to_start_of_list");
+	setup();
+		test_add_multiple_data_to_start_of_list();
+	tearDown();
+	testEnded();
 	testStarted("test_add_data_in_beginning_of_list_with_values");
 	setup();
 		test_add_data_in_beginning_of_list_with_values();

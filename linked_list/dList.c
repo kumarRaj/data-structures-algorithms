@@ -30,10 +30,11 @@ int insert(DoubleList *dList, int index, void *element){
 		dList->length++;
 		return 1;
 	}
-	if(i == 0){
-		newNode = createNode(NULL,element, dList->head);
+	if(index == 0){
+		newNode = createNode(NULL, element, dList->head);
 		dList->head->previous = newNode;
 		dList->head = newNode;
+		dList->length++;
 		return 1;
 	}
 	if(i == dList->length){
