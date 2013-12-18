@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include "dList.h"
 
-Node* createNode(void *prevAddress,void *data, void *nextAddress){
-	Node *element = malloc(sizeof(Node));
+node* createNode(void *prevAddress,void *data, void *nextAddress){
+	node *element = malloc(sizeof(node));
 	element->previous = prevAddress;
 	element->data = data;
 	element->next = nextAddress;
@@ -14,36 +14,26 @@ DoubleList* create(){
 	dList->length = 0;
 	return dList;
 }
-Node* goToIndex(DoubleList *dList,int index){
-	Node* temp;int i;
+int insert(DoubleList *dList, int index, void *element){
+	int i;
+	node *temp,*previousNode,*nextnode,*newNode;
+	if(index > dList->length)
+		return 0;
 	temp = dList->head;
 	for (i = 0; i < index ; ++i){
 		if(temp->next != NULL)
 			temp = temp->next;
 	}
-	return temp;
-}
-int insert(DoubleList *dList, int index, void *element){
-	int i;
-	Node *temp,*previousNode,*nextnode,*newNode;
-	if(index > dList->length)
-		return 0;
-	// temp = dList->head;
-	// for (i = 0; i < index ; ++i){
-	// 	if(temp->next != NULL)
-	// 		temp = temp->next;
-	// }
 	if(i == 0 && dList->length == 0){
 		newNode = createNode(NULL,element, NULL);
 		dList->head = newNode;
 		dList->length++;
 		return 1;
 	}
-	if(index == 0){
-		newNode = createNode(NULL, element, dList->head);
+	if(i == 0){
+		newNode = createNode(NULL,element, dList->head);
 		dList->head->previous = newNode;
 		dList->head = newNode;
-		dList->length++;
 		return 1;
 	}
 	if(i == dList->length){
@@ -59,12 +49,11 @@ int insert(DoubleList *dList, int index, void *element){
 }
 int delete(DoubleList *dList, int index){
 	int i;
-	Node *temp,*previousNode,*nextNode;
+	node *temp,*previousNode,*nextnode,*newNode;
 	if(index > dList->length)
 		return 0;
 	temp = dList->head;
-	for (i = 0; i < index; ++i){
-		if(temp->next != NULL)
+	for (i = 0; i < index && i < dList->length ; ++i){
 			temp = temp->next;
 	}
 	if(i == 0 && dList->length == 1){
@@ -90,4 +79,36 @@ int delete(DoubleList *dList, int index){
 	free(temp);
 	dList->length--;
 	return 1;
+}
+
+void sort(DoubleList* list, compare fun){
+	node *temp,*nodeToCompare,*currentNode;
+	void *data;
+	int change = 0;
+	if(list->head == NULL)
+		return;
+	for (nodeToCompare = list->head->next; nodeToCompare != NULL; nodeToCompare = nodeToCompare->next){
+		data = nodeToCompare->data;
+		change = 0;
+		for(temp = nodeToCompare->previous;temp != NULL;temp = temp->previous){
+			currentNode = temp;
+			if(fun(data,temp->data) < 0){
+				change++;
+				temp->next->data = temp->data;
+			}
+			else break;
+		}
+		if(change)
+			currentNode->data = data;
+	}
+}
+
+void dispose(DoubleList *dList){
+	node *temp;
+	if(dList->head == NULL)
+		return;
+	temp = dList->head;
+	dList->head = temp->next;
+	free(temp);
+	dispose(dList);
 }

@@ -49,6 +49,11 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
+	testStarted("test_create_node");
+	setup();
+		test_create_node();
+	tearDown();
+	testEnded();
 	testStarted("test_add_data_to_empty_list");
 	setup();
 		test_add_data_to_empty_list();
@@ -62,11 +67,6 @@ int main(){
 	testStarted("test_add_multiple_data_to_end_of_list");
 	setup();
 		test_add_multiple_data_to_end_of_list();
-	tearDown();
-	testEnded();
-	testStarted("test_add_multiple_data_to_start_of_list");
-	setup();
-		test_add_multiple_data_to_start_of_list();
 	tearDown();
 	testEnded();
 	testStarted("test_add_data_in_beginning_of_list_with_values");
@@ -117,6 +117,11 @@ int main(){
 	testStarted("test_delete_last_element_on_struct");
 	setup();
 		test_delete_last_element_on_struct();
+	tearDown();
+	testEnded();
+	testStarted("test_isort_on_dList_should_sort_list");
+	setup();
+		test_isort_on_dList_should_sort_list();
 	tearDown();
 	testEnded();
 
