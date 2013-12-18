@@ -8,7 +8,7 @@ void* binarySearch(void *key,void *base,
 	if(0 == mid)
 		return NULL;
 	if(cmpResult > 0)
-		bsearch(key, (base + (mid*size)), numberOfElements/2, size, cmpfunc);
+		return bsearch(key, (base + (mid*size)), numberOfElements/2, size, cmpfunc);
 	if(cmpResult < 0)
-		bsearch(key, base , mid, size, cmpfunc);
+		return bsearch(key, base , mid, size, cmpfunc);
 }

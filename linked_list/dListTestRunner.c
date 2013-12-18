@@ -49,11 +49,6 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_create_node");
-	setup();
-		test_create_node();
-	tearDown();
-	testEnded();
 	testStarted("test_add_data_to_empty_list");
 	setup();
 		test_add_data_to_empty_list();
@@ -102,11 +97,6 @@ int main(){
 	testStarted("test_delete_element_in_between");
 	setup();
 		test_delete_element_in_between();
-	tearDown();
-	testEnded();
-	testStarted("test_find_index_gives_index_of_element");
-	setup();
-		test_find_index_gives_index_of_element();
 	tearDown();
 	testEnded();
 	testStarted("test_insert_struct_in_list_starting");

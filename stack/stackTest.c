@@ -18,14 +18,14 @@ typedef struct {
 } Account;
 
 int areAccountsEqual(Account expected,Account actual){
-        return expected.accNo == actual.accNo && expected.balance == actual.balance;
+    return expected.accNo == actual.accNo && expected.balance == actual.balance;
 }
 
 
 void test_creates_a_stack_of_given_length (){
-        stack = create(3);
-        ASSERT(3 == stack->length);
-        ASSERT(0 == stack->top);
+    stack = create(3);
+    ASSERT(3 == stack->length);
+    ASSERT(0 == stack->top);
 };
 
 void test_adds_the_given_integerto_stack(){

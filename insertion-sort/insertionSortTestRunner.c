@@ -49,9 +49,24 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_isort_on_dList");
+	testStarted("test_should_sort_data_");
 	setup();
-		test_isort_on_dList();
+		test_should_sort_data_();
+	tearDown();
+	testEnded();
+	testStarted("test_should_sort_int_data");
+	setup();
+		test_should_sort_int_data();
+	tearDown();
+	testEnded();
+	testStarted("test_should_sort_double_data");
+	setup();
+		test_should_sort_double_data();
+	tearDown();
+	testEnded();
+	testStarted("test_should_sort_char_data");
+	setup();
+		test_should_sort_char_data();
 	tearDown();
 	testEnded();
 

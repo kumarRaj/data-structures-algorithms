@@ -7,7 +7,7 @@ typedef struct {
 typedef char String_256[256];
 Stack *create(int length);
 int push(Stack *stack,void *element);
-void** getElement(Stack *stack,int top);
+// void** getElement(Stack *stack,int top);
 void *pop(Stack *stack);
 void *peek(Stack *stack);
 int isEmpty(Stack *stack);

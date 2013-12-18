@@ -3,7 +3,6 @@
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 int compareInt(const void* key,const void* element){
-    // printf("-%d--%d-\n",*(int*)key,*(int*)element);
     return ( *(int*)key -  *(int*)element );
 }
 void test_to_search_in_integer_array_element_less_than_mid(){
@@ -25,16 +24,16 @@ void test_to_search_integer_array_element_greater_than_mid(){
     ASSERT(345 == result);
 }
 int compareDouble(const void* key,const void* element){
-        return ( *(double*)key -  *(double*)element );
+    return ( *(double*)key -  *(double*)element );
 }
 void test_to_search_double_in_array(){
-        double arr[]={1,2,3,4,5};
-        double key = 5;
-        double result = *(double*)bsearch(&key, arr, 5, sizeof(double), compareDouble);
-        ASSERT(5 == result);
+    double arr[]={1,2,3,4,5};
+    double key = 5;
+    double result = *(double*)bsearch(&key, arr, 5, sizeof(double), compareDouble);
+    ASSERT(5 == result);
 }
 void test_to_search_element_which_is_not_present_in_double_array_(){
-        double arr[] = {1.2,2.2,3.2,4.2,5.2};
-        double key = 6.2;
-        ASSERT(NULL == (double*)bsearch(&key, arr, 5, sizeof(double), compareDouble));
+    double arr[] = {1.2,2.2,3.2,4.2,5.2};
+    double key = 6.2;
+    ASSERT(NULL == (double*)bsearch(&key, arr, 5, sizeof(double), compareDouble));
 }

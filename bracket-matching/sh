@@ -1,1 +1,0 @@
-sh runTest.sh bracesValidation.c -need:lib/stack.o

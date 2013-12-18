@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include "dList.h"
 
-node* createNode(void *prevAddress,void *data, void *nextAddress){
-	node *element = malloc(sizeof(node));
+Node* createNode(void *prevAddress,void *data, void *nextAddress){
+	Node *element = malloc(sizeof(Node));
 	element->previous = prevAddress;
 	element->data = data;
 	element->next = nextAddress;
@@ -14,16 +14,25 @@ DoubleList* create(){
 	dList->length = 0;
 	return dList;
 }
-int insert(DoubleList *dList, int index, void *element){
-	int i;
-	node *temp,*previousNode,*nextnode,*newNode;
-	if(index > dList->length)
-		return 0;
+Node* goToIndex(DoubleList *dList,int index){
+	Node* temp;int i;
 	temp = dList->head;
 	for (i = 0; i < index ; ++i){
 		if(temp->next != NULL)
 			temp = temp->next;
 	}
+	return temp;
+}
+int insert(DoubleList *dList, int index, void *element){
+	int i;
+	Node *temp,*previousNode,*nextnode,*newNode;
+	if(index > dList->length)
+		return 0;
+	// temp = dList->head;
+	// for (i = 0; i < index ; ++i){
+	// 	if(temp->next != NULL)
+	// 		temp = temp->next;
+	// }
 	if(i == 0 && dList->length == 0){
 		newNode = createNode(NULL,element, NULL);
 		dList->head = newNode;
@@ -50,11 +59,12 @@ int insert(DoubleList *dList, int index, void *element){
 }
 int delete(DoubleList *dList, int index){
 	int i;
-	node *temp,*previousNode,*nextnode,*newNode;
+	Node *temp,*previousNode,*nextNode;
 	if(index > dList->length)
 		return 0;
 	temp = dList->head;
-	for (i = 0; i < index && i < dList->length ; ++i){
+	for (i = 0; i < index; ++i){
+		if(temp->next != NULL)
 			temp = temp->next;
 	}
 	if(i == 0 && dList->length == 1){
@@ -80,15 +90,4 @@ int delete(DoubleList *dList, int index){
 	free(temp);
 	dList->length--;
 	return 1;
-}
-int findIndex(DoubleList *dList, void *element){
-	int i,index = 0; node *temp = dList->head;
-	for (i = 0; temp->next != NULL ; ++i){
-		if(temp->data == element)
-			break;
-		temp = temp->next;
-	}
-	if(i != dList->length)
-		return i;
-	return -1;
 }

@@ -49,16 +49,6 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_1isOpenBracket_returns_corresponding_simple_close_bracket");
-	setup();
-		test_1isOpenBracket_returns_corresponding_simple_close_bracket();
-	tearDown();
-	testEnded();
-	testStarted("test_2isOpenBracket_returns_corresponding_curly_close_bracket");
-	setup();
-		test_2isOpenBracket_returns_corresponding_curly_close_bracket();
-	tearDown();
-	testEnded();
 	testStarted("test_3gives_true_for_valid_open_and_closing_curly_braces");
 	setup();
 		test_3gives_true_for_valid_open_and_closing_curly_braces();
@@ -77,11 +67,6 @@ int main(){
 	testStarted("test_7gives_false_for_extra_closing_braces");
 	setup();
 		test_7gives_false_for_extra_closing_braces();
-	tearDown();
-	testEnded();
-	testStarted("test_8gives_true_for_closing_brace");
-	setup();
-		test_8gives_true_for_closing_brace();
 	tearDown();
 	testEnded();
 	testStarted("test_9gives_false_for_only_closing_braces");

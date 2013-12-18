@@ -13,11 +13,13 @@ char isCloseBracket(char letter){
 int validateBraces(char *text){
 	int i,result;
 	char expected = '\0';
+	char closeBracket;
 	Stack *stack = create(sizeof(char), strlen(text));
 	for (i = 0; i < strlen(text); ++i){
-		if(getClosingBracket(text[i])){
+		closeBracket = getClosingBracket(text[i]);
+		if(closeBracket){
 			push(stack, &text[i]);
-			expected = getClosingBracket(text[i]);
+			expected = closeBracket;
 			continue;
 		}
 		if(text[i] == expected){
