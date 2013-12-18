@@ -1,5 +1,5 @@
 #include "queue_lib.h"
-
+#include <stdlib.h>
 void** getElement(Queue *queue,int index){
 	return queue->base+(index);
 }
@@ -14,13 +14,13 @@ void dispose(Queue *queue){
 	free(queue->base);
 	free(queue);
 }
-bool enqueue(Queue *queue, void *elementAddress){
+int enqueue(Queue *queue, void *elementAddress){
 	void **address;
 	if(isFull(queue))
-		return false;
+		return 0;
 	address = getElement(queue,++queue->rear);
 	*address = elementAddress;
-	return true;
+	return 1;
 }
 void* dequeue(Queue *queue){
 	int i;
@@ -34,9 +34,9 @@ void* dequeue(Queue *queue){
 	queue->rear--;
 	return result;
 }
-bool isEmpty(Queue *queue){
+int isEmpty(Queue *queue){
 	return (queue->rear == -1);
 }
-bool isFull(Queue *queue){
+int isFull(Queue *queue){
 	return (queue->rear == queue->length - 1);
 }

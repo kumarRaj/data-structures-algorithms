@@ -1,6 +1,5 @@
 #include "stack.h"
 #include <stdlib.h>
-#include <memory.h>
 void** getElement(Stack* stack,int top){
         return stack->elements + top * sizeof(void*);
 };

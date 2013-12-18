@@ -1,9 +1,9 @@
 #include "testUtils.h"
 #include "queue_lib.h"
-
+#include <stdlib.h>
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
-bool areEqual(Queue expectedQueue,Queue actualQueue){
-	bool res = expectedQueue.length == actualQueue.length
+int areEqual(Queue expectedQueue,Queue actualQueue){
+	int res = expectedQueue.length == actualQueue.length
 		&& expectedQueue.rear == actualQueue.rear;
 	return res;
 }
@@ -21,11 +21,11 @@ void test_create_integer_queue(){
 }
 void test_enqueue_on_empty_queue(){
 	int num = 10;
-	bool status;
+	int status;
 	newQueue = create(3);
 	status = enqueue(newQueue, &num);
 	ASSERT(10 == **(int**)getElement(newQueue,0));
-	ASSERT(true == status);
+	ASSERT(1 == status);
 	ASSERT(0 == newQueue->rear);
 }
 void test_enqueue_on_non_empty_queue(){
@@ -58,14 +58,14 @@ void test_enqueue_on_putting_struct_to_queue(){
 }
 void test_enqueue_on_full_queue_returns_false(){
 	int num = 23;
-	bool status;
+	int status;
 	newQueue = create(3);
 	enqueue(newQueue, &num);
 	enqueue(newQueue, &num);
 	status = enqueue(newQueue, &num);
-	ASSERT(true == status);
+	ASSERT(1 == status);
 	status = enqueue(newQueue, &num);
-	ASSERT(false == status);
+	ASSERT(0 == status);
 	ASSERT(2 == newQueue->rear);
 }
 void test_deque_on_queue_with_values(){
@@ -100,22 +100,22 @@ void test_deque_with_struct(){
 }
 void test_isEmpty_gives_true_for_empty_queue(){
 	newQueue = create(3);
-	ASSERT(true == isEmpty(newQueue));
+	ASSERT(1 == isEmpty(newQueue));
 }
 void test_is_not_Empty_gives_false_for_full_queue(){
 	int a = 5;
 	newQueue = create(3);
 	enqueue(newQueue, &a);
-	ASSERT(false == isEmpty(newQueue));
+	ASSERT(0 == isEmpty(newQueue));
 }
 void test_isFull_gives_true_for_full_queue(){
 	int a = 5;
 	newQueue = create(2);
 	enqueue(newQueue, &a);
 	enqueue(newQueue, &a);
-	ASSERT(true == isFull(newQueue));
+	ASSERT(1 == isFull(newQueue));
 }
 void test_dequeue_is_not_Full_gives_false_for_non_full_queue(){
 	newQueue = create(3);
-	ASSERT(false == isFull(newQueue));
+	ASSERT(0 == isFull(newQueue));
 }
