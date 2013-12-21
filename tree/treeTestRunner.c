@@ -49,8 +49,21 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
+	testStarted("test_insert_root_node");
+	setup();
+		test_insert_root_node();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
 	return 0;
 }
+
+void setup(){}
+
+void tearDown(){}
+
+void fixtureSetup(){}
+
+void fixtureTearDown(){}

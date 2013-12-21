@@ -49,11 +49,6 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_create_node");
-	setup();
-		test_create_node();
-	tearDown();
-	testEnded();
 	testStarted("test_add_data_to_empty_list");
 	setup();
 		test_add_data_to_empty_list();
@@ -119,9 +114,34 @@ int main(){
 		test_delete_last_element_on_struct();
 	tearDown();
 	testEnded();
-	testStarted("test_isort_on_dList_should_sort_list");
+	testStarted("test_sort_on_dList_should_sort_list");
 	setup();
-		test_isort_on_dList_should_sort_list();
+		test_sort_on_dList_should_sort_list();
+	tearDown();
+	testEnded();
+	testStarted("test_search_data_in_list_should_give_found_element");
+	setup();
+		test_search_data_in_list_should_give_found_element();
+	tearDown();
+	testEnded();
+	testStarted("test_search_data_should_give_NULL_if_data_not_found");
+	setup();
+		test_search_data_should_give_NULL_if_data_not_found();
+	tearDown();
+	testEnded();
+	testStarted("test_hasnext_of_getiterator_gives_true_if_list_not_empty");
+	setup();
+		test_hasnext_of_getiterator_gives_true_if_list_not_empty();
+	tearDown();
+	testEnded();
+	testStarted("test_hasnext_of_getiterator_gives_false_if_list_not_empty");
+	setup();
+		test_hasnext_of_getiterator_gives_false_if_list_not_empty();
+	tearDown();
+	testEnded();
+	testStarted("test_next_of_getiterator_gives_next_data");
+	setup();
+		test_next_of_getiterator_gives_next_data();
 	tearDown();
 	testEnded();
 
