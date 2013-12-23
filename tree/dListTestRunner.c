@@ -49,16 +49,6 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_insert_root_node");
-	setup();
-		test_insert_root_node();
-	tearDown();
-	testEnded();
-	testStarted("test_insert_node_under_root_node");
-	setup();
-		test_insert_node_under_root_node();
-	tearDown();
-	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

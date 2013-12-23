@@ -245,3 +245,17 @@ void test_next_of_getiterator_gives_next_data(){
 	if(it.hasNext(&it))
 	ASSERT(5 == *(int*)it.next(&it));
 }
+void test_should_give_all_values_using_iterator(){
+	DoubleList dList = create();
+	Iterator it;int i = 0;
+	int numbers[] = {5,10,15,20};
+	insert(&dList, 0, numbers);
+	insert(&dList, 1, &numbers[1]);
+	insert(&dList, 2, &numbers[2]);
+	insert(&dList, 3, &numbers[3]);
+	it = getIterator(&dList);
+	while(it.hasNext(&it)){		
+		ASSERT(numbers[i] == *(int*)it.next(&it));
+		i++;
+	}
+}

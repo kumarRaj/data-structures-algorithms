@@ -101,13 +101,8 @@ void sort(DoubleList list, compare fun){
 }
 int hasNextForList(Iterator *it){
 	DoubleList *dList;
-	int i = 0;
-	node *temp;
 	dList = (DoubleList*)it->list;
-	temp = dList->head;
-	for(i = 0;i < it->position;i++)
-		temp = temp->next;
-	if(NULL == temp)
+	if(it->position == dList->length)
 		return 0;
 	return 1;
 }
@@ -115,12 +110,11 @@ void* nextForList(Iterator *it){
 	DoubleList *dList;
 	int i = 0;
 	node *temp;
+	if(0 == hasNextForList(it)) return NULL;
 	dList = (DoubleList*)it->list;
 	temp = dList->head;
 	for(i = 0;i < it->position;i++)
 		temp = temp->next;
-	if(it->position == dList->length)
-		return NULL;
 	it->position++;
 	return temp->data;
 }

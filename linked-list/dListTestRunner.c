@@ -144,6 +144,11 @@ int main(){
 		test_next_of_getiterator_gives_next_data();
 	tearDown();
 	testEnded();
+	testStarted("test_should_give_all_values_using_iterator");
+	setup();
+		test_should_give_all_values_using_iterator();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
