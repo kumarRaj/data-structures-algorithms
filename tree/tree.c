@@ -27,60 +27,48 @@ Tree createTree(compare cmp){
 }
 int insertToTree(Tree* tree, void* parentData, void* childData) {
 	TreeNode *root = (TreeNode*)tree->root;
-	TreeNode *nodeToInsert;
+	TreeNode *nodeToInsert, *parentNode;
 	if(NULL == tree->root){
 		tree->root = createTreeNode(childData, NULL);
 		return 1;
 	}
 	if(!tree->cmp(root->data,parentData)){
-		nodeToInsert = createTreeNode(childData, parentData);
+		parentNode = root;
+		nodeToInsert = createTreeNode(childData, parentNode);
 		insert(&root->children, 0, nodeToInsert);
 		return 1;
 	}
+	parentNode = getTreeNode(root->children, parentData, tree->cmp);
+	nodeToInsert = createTreeNode(childData, parentNode);
+	insert(&parentNode->children, 0, nodeToInsert);
 	return 1;
 }
 void* treeNext(Iterator *it){
-	TreeNode *node;// = it->next(it);
+	TreeNode *node;
 	Iterator treeIterator = getIterator(it->list);
-	// printf("%d\n", it->position);
-	// it->next(it);
 	treeIterator.position = it->position;
-	it->position++;
 	node = treeIterator.next(&treeIterator);
+	it->position++;
 	return node->data;
 }
 
 Iterator getChildren(Tree* tree, void *parent) {
 	TreeNode *temp,*root = (TreeNode*)tree->root;
-	// DoubleList dataList = create();
-	Iterator it = getIterator(&root->children);
+	Iterator it;
+	if(!tree->cmp(root->data,parent))
+		temp = root;
+	else 
+		temp = getTreeNode(root->children, parent, tree->cmp);
+	it = getIterator(&temp->children);
 	it.next = &treeNext;
-	// while(it.hasNext(&it)){
-		// temp = (TreeNode*)it.next(&it);
-		// insert(&dataList, it.position - 1, temp->data);
-	// }
-	return it;//(&dataList);
+	return it;
 }
-// TreeNode* getTreeNode(Tree *tree,void *parentData){
-// 	TreeNode* foundNode;
-// 	foundNode = tree->root;
-// 	if(foundNode->data == parentData){
-// 		return foundNode;
+
+
+
+// int isData_RootNode(TreeNode node,void *dataToFind,compare cmp){
+// 	if(!cmp(node.data,dataToFind)){
+// 		return 1;
 // 	}
-
-// 	return NULL;
+// 	return 0;
 // }
-	// TreeNode* parentNode = search(tree, parent);
-	// if (parentNode == NULL) {
-	// 	return something;
-	// };
-
-// 	listIterator = iterator(parentNode->children);	
-// 	iterator.nodes = listIterator;
-// }
-
-// void* nextItem(Iterator *it) {
-// 	DoubleList* list = (DoubleList*)it->list;
-// 	return next(it); 
-// }
-
