@@ -2,6 +2,7 @@
 
 #include "testUtils.h"
 #include "arrayList.h"
+#include "include/iterator.h"
 
 const int SUCCESS = 1;
 const int FAILURE = 0;
@@ -101,4 +102,59 @@ void test_should_get_minus_1_if_element_not_found() {
 	insert(internsPtr, 0, &prateek);
 	insert(internsPtr, 1, &ji);
 	ASSERT(-1 == search(internsPtr, &tanbirka, compareInterns));
+}
+void test_iterator_hasNext_should_give_TRUE_when_element_is_present() {
+	Intern tanbirka = {43343, "Tanbir Ka"};
+	Iterator it = getIterator(internsPtr);
+	insert(internsPtr, 0, &prateek);
+	ASSERT(1 == it.hasNext(&it));
+}
+void test_iterator_hasNext_should_give_FALSE_when_element_is_not_present() {
+	Intern tanbirka = {43343, "Tanbir Ka"};
+	Iterator it = getIterator(internsPtr);
+	ASSERT(0 == it.hasNext(&it));
+}
+void test_iterator_next_should_give_next_element() {
+	Iterator it = getIterator(internsPtr);
+	Intern *res;
+	insert(internsPtr, 0, &prateek);
+	res = (Intern*)it.next(&it);
+	ASSERT(0 == compareInterns(&prateek, res));
+}
+void test_iterator_next_should_give_NULL_in_empty_ArrayList() {
+	Iterator it = getIterator(internsPtr);
+	Intern *res;
+	res = (Intern*)it.next(&it);
+	ASSERT(NULL == res);
+}
+void test_deletes_single_element_from_list(){
+	Iterator it = getIterator(internsPtr);
+	insert(internsPtr, 0, &prateek);
+	remove(internsPtr, 0);
+	ASSERT(0 == it.hasNext(&it));
+}
+void test_deletes_and_shifts_elements_left(){
+	Intern tanbirka = {43343, "Tanbir Ka"};
+    int result;
+    Intern *res;
+	Iterator it = getIterator(internsPtr);
+    insert(internsPtr, 0, &prateek);
+    insert(internsPtr, 1, &ji);
+    insert(internsPtr, 2, &tanbirka);
+    result = remove(internsPtr, 0);
+    ASSERT(result == SUCCESS);  
+	ASSERT(0 == compareInterns(&ji, get(internsPtr, 0)));
+	ASSERT(0 == compareInterns(&tanbirka, get(internsPtr, 1)));
+}
+void test_add_adds_to_end_of_list(){
+    int result = add(internsPtr, &prateek);
+    ASSERT(result == SUCCESS);  
+	ASSERT(0 == compareInterns(&prateek, get(internsPtr, 0)));
+}
+void test_add_adds_multiple_data_to_end_of_list(){
+    int result = add(internsPtr, &prateek);
+    ASSERT(result == SUCCESS);  
+	result = add(internsPtr, &ji);
+	ASSERT(0 == compareInterns(&prateek, get(internsPtr, 0)));
+	ASSERT(0 == compareInterns(&ji, get(internsPtr, 1)));
 }
