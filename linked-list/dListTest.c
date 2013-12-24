@@ -247,7 +247,8 @@ void test_next_of_getiterator_gives_next_data(){
 }
 void test_should_give_all_values_using_iterator(){
 	DoubleList dList = create();
-	Iterator it;int i = 0;
+	Iterator it;
+	int i = 0;
 	int numbers[] = {5,10,15,20};
 	insert(&dList, 0, numbers);
 	insert(&dList, 1, &numbers[1]);

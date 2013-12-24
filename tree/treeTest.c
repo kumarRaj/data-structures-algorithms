@@ -1,7 +1,6 @@
 #include "testUtils.h"
 #include "tree.h"
 #include <stdlib.h>
-#include <stdio.h>
 const int INSERT_SUCCESSFUL = 1;
 int compareInts(void *a,void *b){
 	return *(int*)a - *(int*)b;
