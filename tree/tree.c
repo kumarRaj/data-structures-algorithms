@@ -1,16 +1,18 @@
 #include "tree.h"
+#include "internalTree.h"
 #include <stdlib.h>
 #include <stdio.h>
-
+int i = 0;
 TreeNode* getTreeNode(DoubleList list,void *dataToFind,compare cmp){
 	Iterator it = getIterator(&list);
 	TreeNode *tn;
 	while(it.hasNext(&it)){
 		tn = (TreeNode*)it.next(&it);
-		if(!cmp(tn->data,dataToFind))
+		if(0 == cmp(tn->data,dataToFind)){
 			return tn;
+		}
 		if(tn->children.head)
-			getTreeNode(tn->children, dataToFind, cmp);
+			return getTreeNode(tn->children, dataToFind, cmp);
 	}
 	return NULL;
 }
@@ -32,7 +34,7 @@ int insertToTree(Tree* tree, void* parentData, void* childData) {
 		tree->root = createTreeNode(childData, NULL);
 		return 1;
 	}
-	if(!tree->cmp(root->data,parentData)){
+	if(0 == tree->cmp(root->data,parentData)){
 		parentNode = root;
 		nodeToInsert = createTreeNode(childData, parentNode);
 		insert(&root->children, 0, nodeToInsert);
@@ -55,7 +57,7 @@ void* treeNext(Iterator *it){
 Iterator getChildren(Tree* tree, void *parent) {
 	TreeNode *temp,*root = (TreeNode*)tree->root;
 	Iterator it;
-	if(!tree->cmp(root->data,parent))
+	if(0 == tree->cmp(root->data,parent))
 		temp = root;
 	else 
 		temp = getTreeNode(root->children, parent, tree->cmp);
@@ -63,12 +65,26 @@ Iterator getChildren(Tree* tree, void *parent) {
 	it.next = &treeNext;
 	return it;
 }
-
-
-
-// int isData_RootNode(TreeNode node,void *dataToFind,compare cmp){
-// 	if(!cmp(node.data,dataToFind)){
-// 		return 1;
-// 	}
-// 	return 0;
-// }
+int deleteFromTree(Tree *tree, void *data){
+	TreeNode *root = (TreeNode*)tree->root;
+	TreeNode *tn,*parent;
+	Iterator it;
+	tn = getTreeNode(root->children, data, tree->cmp);
+	if(0 == tn->children.length){
+		parent = tn->parent;
+		it = getIterator(&parent->children);
+		while(it.hasNext(&it)){
+			if(tree->cmp(data,it.next(&it)))
+				break;
+		}
+		delete(&parent->children, it.position - 1);
+		return 1;
+	}
+	return 0;
+}
+int searchInTree(Tree* tree, void* searchElement){
+    TreeNode* root = (TreeNode*)(tree->root);
+    if(NULL != getTreeNode(root->children,searchElement,tree->cmp))
+        return 1;
+    return 0;
+}
