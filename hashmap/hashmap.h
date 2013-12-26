@@ -4,12 +4,11 @@
 #define _COMPARE_
 typedef int (*compare)(void* firstElement, void* secondElement);
 typedef int (*hash)(void *key);
-#endif
+#endif	
 typedef struct {
-	void *bucket;
+	void **bucket;
 	hash hashFunc;
 	compare cmp;
-	int size;
 } HashMap;
 
 HashMap createMap(hash hashFunc, compare compareKey);
