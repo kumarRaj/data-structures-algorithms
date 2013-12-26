@@ -158,3 +158,17 @@ void test_add_adds_multiple_data_to_end_of_list(){
 	ASSERT(0 == compareInterns(&prateek, get(internsPtr, 0)));
 	ASSERT(0 == compareInterns(&ji, get(internsPtr, 1)));
 }
+void increaseAgeBy10(void* data){
+    ((Intern*)data)->age += 10;
+}
+
+void test_iterate_visits_each_element_of_list(){
+    Iterator b4it,a4it;
+    b4it = getIterator(internsPtr);
+    add(internsPtr, &prateek);
+    add(internsPtr, &ji);
+    iterate(interns, increaseAgeBy10);
+    a4it = getIterator(internsPtr);
+	ASSERT(28 == (*(Intern*)a4it.next(&a4it)).age);
+ 	ASSERT(27 == (*(Intern*)a4it.next(&a4it)).age);
+}

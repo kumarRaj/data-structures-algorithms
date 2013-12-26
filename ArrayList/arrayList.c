@@ -89,6 +89,12 @@ Iterator getIterator(ArrayList* list){
     it.next = &getNextDataForArrayList;
     return it;
 }
+void iterate(ArrayList list, ForEach* forEach){
+    int result,index;
+    for(index = 0;index < list.length ;index++){
+        forEach(list.base[index]);
+    }
+}
 
 void dispose(ArrayList *list) {
 	free(list->base);

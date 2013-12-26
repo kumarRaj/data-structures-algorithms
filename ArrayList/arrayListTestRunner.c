@@ -134,6 +134,11 @@ int main(){
 		test_add_adds_multiple_data_to_end_of_list();
 	tearDown();
 	testEnded();
+	testStarted("test_iterate_visits_each_element_of_list");
+	setup();
+		test_iterate_visits_each_element_of_list();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
