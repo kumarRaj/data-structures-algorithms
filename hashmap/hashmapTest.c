@@ -12,7 +12,7 @@ int hashFun(void *key){
 };
 typedef struct{
 	int key;
-	char *value;
+	char value[50];
 } Intern;
 const Intern prateek = {15386,"Prateek"};
 const Intern raj = {15388,"Raj"};
