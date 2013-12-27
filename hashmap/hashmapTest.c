@@ -14,11 +14,12 @@ typedef struct{
 	int key;
 	char value[50];
 } Intern;
-const Intern prateek = {15386,"Prateek"};
-const Intern raj = {15388,"Raj"};
-const Intern sumit = {15432,"Sumit"};
+Intern prateek = {15386,"Prateek"};
+Intern raj = {15388,"Raj"};
+Intern sumit = {15432,"Sumit"};
+
 void test_add_an_element_to_hashmap(){
-	HashMap map = createMap(hashFun, areKeyEqual);
-	ASSERT(put(&map, &raj.key, &raj.value));
-	ASSERT(strcmp(get(&map, &raj.key),raj.value));
+	HashMap map = HashMap_createMap(hashFun, areKeyEqual);
+	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
+	ASSERT(0 == strcmp((char*)HashMap_get(&map, &raj.key),raj.value));
 }

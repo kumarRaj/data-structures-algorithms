@@ -1,8 +1,7 @@
 #include "include/dList.h"
 
-typedef struct hashNode {
+typedef struct hn {
 	void* key;
 	void* value;
-	DoubleList elements;
-}HashNode;
+} HashNode;
 

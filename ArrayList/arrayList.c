@@ -1,7 +1,7 @@
 #include "arrayList.h"
 #include <stdlib.h>
 #include "include/iterator.h"
-ArrayList create(int capacity) {
+ArrayList ArrayList_create(int capacity) {
 	ArrayList list;
 	list.base = (void*)malloc(sizeof(void*) * capacity);
 	list.capacity = capacity;
@@ -9,61 +9,61 @@ ArrayList create(int capacity) {
 	return list;
 }
 
-void shiftElementsRightIfNeeded(ArrayList *list, int index) {
+void ArrayList_shiftElementsRightIfNeeded(ArrayList *list, int index) {
 	int i;
 	for (i = list->length - 1; i >= index; i--) {
 		list->base[i+1] = list->base[i];
 	}
 }
 
-int isFull(ArrayList *list) {
+int ArrayList_isFull(ArrayList *list) {
 	return list->length == list->capacity;
 }
 
-void increaseCapacity(ArrayList *list) {
+void ArrayList_increaseCapacity(ArrayList *list) {
 	int targetCapacity;
-	if (isFull(list)) {
+	if (ArrayList_isFull(list)) {
 		targetCapacity = list->capacity * 2;
 		list->base = realloc(list->base, targetCapacity * sizeof(void*));
 		list->capacity = targetCapacity;
 	}	
 }
 
-int insert(ArrayList *list, int index, void* data) {
+int ArrayList_insert(ArrayList *list, int index, void* data) {
 	if (list == NULL) return 0;
 	if (index < 0 || index > list->length) return 0;
 
-	increaseCapacity(list);
-	shiftElementsRightIfNeeded(list, index);
+	ArrayList_increaseCapacity(list);
+	ArrayList_shiftElementsRightIfNeeded(list, index);
 
 	list->base[index] = data;
 	list->length++;
 
 	return 1;
 }
-int add(ArrayList *list,void *data){
-	return insert(list, list->length, data);
+int ArrayList_add(ArrayList *list,void *data){
+	return ArrayList_insert(list, list->length, data);
 }
-void shiftElementsLeftIfNeeded(ArrayList *list, int index) {
+void ArrayList_shiftElementsLeftIfNeeded(ArrayList *list, int index) {
 	int i;
 	for(i = index;i < list->length-1;i++){
         list->base[i] = list->base[i+1];
     }
 }
 
-int remove(ArrayList *list,int index){
+int ArrayList_remove(ArrayList *list,int index){
 	int i;
 	if (list == NULL) return 0;
 	if (index < 0 || index > list->length) return 0;
-    shiftElementsLeftIfNeeded(list, index);
+    ArrayList_shiftElementsLeftIfNeeded(list, index);
     list->length--;
     return 1;        
 }
-void* get(ArrayList *list, int index) {
+void* ArrayList_get(ArrayList *list, int index) {
 	if (index < 0 || index >= list->length) return NULL;
 	return list->base[index];
 }
-int search(ArrayList *list, void *searchElement, compare cmpFun){
+int ArrayList_search(ArrayList *list, void *searchElement, compare cmpFun){
 	int i;
 	for(i = 0;i < list->length;i++){
 		if(0 == cmpFun(searchElement,list->base[i]))
@@ -71,31 +71,31 @@ int search(ArrayList *list, void *searchElement, compare cmpFun){
 	}
 	return -1;
 }
-int hasNextForArrayList(Iterator* it){
+int ArrayList_hasNextForArrayList(Iterator* it){
     ArrayList *list = it->list;
     if(list->length <= it->position) return 0;
     return 1;
 }
-void* getNextDataForArrayList(Iterator* it){
+void* ArrayList_getNextDataForArrayList(Iterator* it){
 	ArrayList* list = it->list;
-    if(!hasNextForArrayList(it)) return NULL;
+    if(!ArrayList_hasNextForArrayList(it)) return NULL;
     return list->base[it->position++];
 }
-Iterator getIterator(ArrayList* list){
+Iterator ArrayList_getIterator(ArrayList* list){
     Iterator it;
     it.list = list;
     it.position = 0;
-    it.hasNext = &hasNextForArrayList;
-    it.next = &getNextDataForArrayList;
+    it.hasNext = &ArrayList_hasNextForArrayList;
+    it.next = &ArrayList_getNextDataForArrayList;
     return it;
 }
-void iterate(ArrayList list, ForEach* forEach){
+void ArrayList_iterate(ArrayList list, ForEach* forEach){
     int result,index;
     for(index = 0;index < list.length ;index++){
         forEach(list.base[index]);
     }
 }
 
-void dispose(ArrayList *list) {
+void ArrayList_dispose(ArrayList *list) {
 	free(list->base);
 }

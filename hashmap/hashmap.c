@@ -1,19 +1,45 @@
 #include "hashmap.h"
+#include "include/dList.h"
+#include "include/ArrayList.h"
 #include "internalHashMap.h"
 #include <stdlib.h>
-
-HashMap createMap(hash hashFunc, compare compareKey){
-	// ArrayUtil
-	HashMap map = {malloc(sizeof(DoubleList) * 10),hashFunc,compareKey};
+#include <stdio.h>
+HashMap HashMap_createMap(hash hashFunc, compare compareKey){
+	ArrayList buckets = ArrayList_create(10);
+	HashMap map;
+	map.buckets = malloc(sizeof(ArrayList));
+	*(ArrayList*)map.buckets = buckets;
+	map.cmp = compareKey;
+	map.hashFunc = hashFunc;
 	return map;
 }
-int put(HashMap *map, const void *key, const void *value){
-	int bucketNumber = map->hashFunc(key);
-	DoubleList *list = (DoubleList*)map->bucket[bucketNumber];
-	insert(list, list->length, value);
+HashNode* HashMap_getHashNode(void *key, void *value){
+	HashNode *hash_node = malloc(sizeof(HashNode));
+	hash_node->key = key;
+	hash_node->value = value;
+	return hash_node;
+}
+int HashMap_put(HashMap *map, void *key, void *value){
+	DoubleList *list;
+	DoubleList newList;
+	HashNode *hash_node;
+	int bucketNumber;
+	bucketNumber = (map->hashFunc(key)) % 10;
+	hash_node = HashMap_getHashNode(key, value);
+	list = (DoubleList*)ArrayList_get(map->buckets, bucketNumber);
+	if(!list){
+		newList = dList_create();
+		dList_insert(&newList, newList.length, hash_node);
+	}
+	else dList_insert(&newList, newList.length, hash_node);
 	return 1;
 }
-void* get(HashMap *map, const void *key){
-	void *data = (char*)"Raj";
-	return &data;
+void* HashMap_get(HashMap *map, void *key){
+	DoubleList newList;
+	int bucketNumber;
+	DoubleList *list;
+	bucketNumber = (map->hashFunc(key)) % 10;
+	list = (DoubleList*)ArrayList_get(map->buckets, bucketNumber);
+	if(!list)	return NULL;
+	return dList_getData(*list, key, map->cmp);
 }

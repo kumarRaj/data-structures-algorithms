@@ -15,27 +15,27 @@ void view_list_details(DoubleList dlist){
 }
 
 void test_add_data_to_empty_list(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	int number = 5;
-	insert(&dlist, 0, &number);
+	dList_insert(&dlist, 0, &number);
 	ASSERT(5 == *(int*)dlist.head->data);
 	ASSERT(dlist.length == 1);
 }
 void test_add_data_to_list_where_index_more_than_length(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	int number = 5;
-	insert(&dlist, 0, &number);
-	ASSERT(0 == insert(&dlist, 5, &number));
+	dList_insert(&dlist, 0, &number);
+	ASSERT(0 == dList_insert(&dlist, 5, &number));
 	ASSERT(5 == *(int*)dlist.head->data);
 	ASSERT(dlist.length == 1);
 }
 void test_add_multiple_data_to_end_of_list(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	int number1 = 5,number2 = 9,number3 = 65;
 	node *second,*third;
-	insert(&dlist, 0, &number1);
-	insert(&dlist, 1, &number2);
-	insert(&dlist, 2, &number3);
+	dList_insert(&dlist, 0, &number1);
+	dList_insert(&dlist, 1, &number2);
+	dList_insert(&dlist, 2, &number3);
 	second = dlist.head->next;
 	third = second->next;
 	ASSERT(5 == *(int*)dlist.head->data);
@@ -46,23 +46,23 @@ void test_add_multiple_data_to_end_of_list(){
 }
 void test_add_data_in_beginning_of_list_with_values(){
 	int number1 = 5,number2 = 9,number0 = 65;
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	node *second,*third;
-	insert(&dlist, 0, &number1);
-	insert(&dlist, 1, &number2);
-	insert(&dlist, 0, &number0);
+	dList_insert(&dlist, 0, &number1);
+	dList_insert(&dlist, 1, &number2);
+	dList_insert(&dlist, 0, &number0);
 	ASSERT(65 == *(int*)dlist.head->data);
 	ASSERT(5 == *(int*)dlist.head->next->data);
 
 }
 void test_add_data_in_between_list(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	int number0 = 5,number2 = 9,number3 = 65,number1 = 17,i;
 	node *second,*third,*fourth;
-	insert(&dlist, 0, &number0);
-	insert(&dlist, 1, &number2);
-	insert(&dlist, 2, &number3);
-	insert(&dlist, 1, &number1);
+	dList_insert(&dlist, 0, &number0);
+	dList_insert(&dlist, 1, &number2);
+	dList_insert(&dlist, 2, &number3);
+	dList_insert(&dlist, 1, &number1);
 	second = dlist.head->next;
 	third = second->next;
 	fourth = third->next;
@@ -72,44 +72,44 @@ void test_add_data_in_between_list(){
 	ASSERT(65 == *(int*)fourth->data);
 }
 void test_delete_first_element_in_list_with_one_element(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	int number1 = 5,number2 = 9,number3 = 65;
 	node *second,*third;
-	insert(&dlist, 0, &number1);
-	ASSERT(delete(&dlist, 0));
+	dList_insert(&dlist, 0, &number1);
+	ASSERT(dList_delete(&dlist, 0));
 	ASSERT(0 == dlist.length);
 	ASSERT(NULL == dlist.head);
 }
 void test_delete_first_element(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	int number1 = 5,number2 = 9,number3 = 65;
 	node *second,*third;
-	insert(&dlist, 0, &number1);
-	insert(&dlist, 1, &number2);
-	insert(&dlist, 2, &number3);
-	ASSERT(delete(&dlist, 0));
+	dList_insert(&dlist, 0, &number1);
+	dList_insert(&dlist, 1, &number2);
+	dList_insert(&dlist, 2, &number3);
+	ASSERT(dList_delete(&dlist, 0));
 	ASSERT(2 == dlist.length);
 	ASSERT(9 == *(int*)dlist.head->data);
 }
 void test_delete_last_element(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	int number1 = 5,number2 = 9,number3 = 65;
 	node *second,*third;
-	insert(&dlist, 0, &number1);
-	insert(&dlist, 1, &number2);
-	insert(&dlist, 2, &number3);
-	ASSERT(delete(&dlist, 2));
+	dList_insert(&dlist, 0, &number1);
+	dList_insert(&dlist, 1, &number2);
+	dList_insert(&dlist, 2, &number3);
+	ASSERT(dList_delete(&dlist, 2));
 	ASSERT(2 == dlist.length);
 	ASSERT(NULL == dlist.head->next->next);
 }
 void test_delete_element_in_between(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	int number1 = 5,number2 = 9,number3 = 65;
 	node *second,*third;
-	insert(&dlist, 0, &number1);
-	insert(&dlist, 1, &number2);
-	insert(&dlist, 2, &number3);
-	ASSERT(delete(&dlist, 1));
+	dList_insert(&dlist, 0, &number1);
+	dList_insert(&dlist, 1, &number2);
+	dList_insert(&dlist, 2, &number3);
+	ASSERT(dList_delete(&dlist, 1));
 	ASSERT(2 == dlist.length);
 	ASSERT(65 == *(int*)dlist.head->next->data);
 }
@@ -123,21 +123,21 @@ int cmpAccount(Account expected,Account actual){
 				&& expected.balance == actual.balance);
 }
 void test_insert_struct_in_list_starting(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	Account acc1 = {5,4000};
-	insert(&dlist, 0, &acc1);
+	dList_insert(&dlist, 0, &acc1);
 	ASSERT(&acc1 == dlist.head->data);
 	ASSERT(cmpAccount(acc1, *(Account*)dlist.head->data));
 	ASSERT(dlist.length == 1);	
 }
 void test_add_struct_in_between_list(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	Account acc0 = {5,450},acc2 = {9,456},acc3 = {6,455},acc1 = {1,445};
 	node *second,*third,*fourth;
-	insert(&dlist, 0, &acc0);
-	insert(&dlist, 1, &acc2);
-	insert(&dlist, 2, &acc3);
-	insert(&dlist, 1, &acc1);
+	dList_insert(&dlist, 0, &acc0);
+	dList_insert(&dlist, 1, &acc2);
+	dList_insert(&dlist, 2, &acc3);
+	dList_insert(&dlist, 1, &acc1);
 	second = dlist.head->next;
 	third = second->next;
 	fourth = third->next;
@@ -147,24 +147,24 @@ void test_add_struct_in_between_list(){
 	ASSERT(cmpAccount(acc3,*(Account*)fourth->data));	
 }
 void test_delete_first_element_on_struct(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	Account acc1 = {5,45},acc2 = {9,56},acc3 = {65,89};
 	node *second,*third;
-	insert(&dlist, 0, &acc1);
-	insert(&dlist, 1, &acc2);
-	insert(&dlist, 2, &acc3);
-	ASSERT(delete(&dlist, 0));
+	dList_insert(&dlist, 0, &acc1);
+	dList_insert(&dlist, 1, &acc2);
+	dList_insert(&dlist, 2, &acc3);
+	ASSERT(dList_delete(&dlist, 0));
 	ASSERT(2 == dlist.length);
 	ASSERT(cmpAccount(acc2,*(Account*)dlist.head->data));
 }
 void test_delete_last_element_on_struct(){
-	DoubleList dlist = create();
+	DoubleList dlist = dList_create();
 	Account acc1 = {5,45},acc2 = {9,56},acc3 = {65,89};
 	node *second,*third;
-	insert(&dlist, 0, &acc1);
-	insert(&dlist, 1, &acc2);
-	insert(&dlist, 2, &acc3);
-	ASSERT(delete(&dlist, 2));
+	dList_insert(&dlist, 0, &acc1);
+	dList_insert(&dlist, 1, &acc2);
+	dList_insert(&dlist, 2, &acc3);
+	ASSERT(dList_delete(&dlist, 2));
 	ASSERT(2 == dlist.length);
 	ASSERT(NULL == dlist.head->next->next);
 }
@@ -184,16 +184,16 @@ int compareInt(void *element1,void *element2){
 	return *(int*)element1 - *(int*)element2;
 }
 void test_sort_on_dList_should_sort_list(){
-	DoubleList dList = create();
-	DoubleList expected = create();
+	DoubleList dList = dList_create();
+	DoubleList expected = dList_create();
 	int nums[3] = {65,55,45};
-	insert(&dList, 0, nums);
-	insert(&dList, 1, &nums[1]);
-	insert(&dList, 2, &nums[2]);
-	insert(&expected, 0, &nums[2]);
-	insert(&expected, 1, &nums[1]);
-	insert(&expected, 2, nums);
-	sort(dList, compareInt);
+	dList_insert(&dList, 0, nums);
+	dList_insert(&dList, 1, &nums[1]);
+	dList_insert(&dList, 2, &nums[2]);
+	dList_insert(&expected, 0, &nums[2]);
+	dList_insert(&expected, 1, &nums[1]);
+	dList_insert(&expected, 2, nums);
+	dList_sort(dList, compareInt);
 	compare_lists(expected, dList, compareInt);
 }
 int cmp(void *elementToCompare,void *element){
@@ -202,59 +202,59 @@ int cmp(void *elementToCompare,void *element){
 	return accToCompare.accno == account.accno;
 }
 void test_search_data_in_list_should_give_found_element(){
-	DoubleList dList = create();
+	DoubleList dList = dList_create();
 	Account acc1 = {5,45},acc2 = {9,56},acc3 = {65,89},expected;
-	insert(&dList, 0, &acc1);
-	insert(&dList, 1, &acc2);
-	insert(&dList, 2, &acc3);
-	expected = *(Account*)getData(dList, &acc2, cmp);
+	dList_insert(&dList, 0, &acc1);
+	dList_insert(&dList, 1, &acc2);
+	dList_insert(&dList, 2, &acc3);
+	expected = *(Account*)dList_getData(dList, &acc2, cmp);
 	ASSERT(acc2.accno == expected.accno);
 	ASSERT(acc2.balance == expected.balance);
 }
 void test_search_data_should_give_NULL_if_data_not_found(){
-	DoubleList dList = create();
+	DoubleList dList = dList_create();
 	Account acc1 = {5,45},acc2 = {9,56},acc3 = {65,89};
 	Account searchElement = {0,0};
 	void *expected = NULL;
-	insert(&dList, 0, &acc1);
-	insert(&dList, 1, &acc2);
-	insert(&dList, 2, &acc3);
-	expected = getData(dList, &searchElement, cmp);
+	dList_insert(&dList, 0, &acc1);
+	dList_insert(&dList, 1, &acc2);
+	dList_insert(&dList, 2, &acc3);
+	expected = dList_getData(dList, &searchElement, cmp);
 	ASSERT(NULL == expected);
 }
 void test_hasnext_of_getiterator_gives_true_if_list_not_empty(){
-	DoubleList dList = create();
+	DoubleList dList = dList_create();
 	Iterator it;
 	int number1 = 5,number2 = 9,number3 = 65;
-	insert(&dList, 0, &number1);
-	it = getIterator(&dList);
+	dList_insert(&dList, 0, &number1);
+	it = dList_getIterator(&dList);
 	ASSERT(1 == it.hasNext(&it));
 }
 void test_hasnext_of_getiterator_gives_false_if_list_not_empty(){
-	DoubleList dList = create();
+	DoubleList dList = dList_create();
 	Iterator it;
-	it = getIterator(&dList);
+	it = dList_getIterator(&dList);
 	ASSERT(0 == it.hasNext(&it));
 }
 void test_next_of_getiterator_gives_next_data(){
-	DoubleList dList = create();
+	DoubleList dList = dList_create();
 	Iterator it;
 	int number1 = 5;
-	insert(&dList, 0, &number1);
-	it = getIterator(&dList);
+	dList_insert(&dList, 0, &number1);
+	it = dList_getIterator(&dList);
 	if(it.hasNext(&it))
 	ASSERT(5 == *(int*)it.next(&it));
 }
 void test_should_give_all_values_using_iterator(){
-	DoubleList dList = create();
+	DoubleList dList = dList_create();
 	Iterator it;
 	int i = 0;
 	int numbers[] = {5,10,15,20};
-	insert(&dList, 0, numbers);
-	insert(&dList, 1, &numbers[1]);
-	insert(&dList, 2, &numbers[2]);
-	insert(&dList, 3, &numbers[3]);
-	it = getIterator(&dList);
+	dList_insert(&dList, 0, numbers);
+	dList_insert(&dList, 1, &numbers[1]);
+	dList_insert(&dList, 2, &numbers[2]);
+	dList_insert(&dList, 3, &numbers[3]);
+	it = dList_getIterator(&dList);
 	while(it.hasNext(&it)){		
 		ASSERT(numbers[i] == *(int*)it.next(&it));
 		i++;

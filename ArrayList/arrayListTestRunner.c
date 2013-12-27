@@ -84,14 +84,14 @@ int main(){
 		test_should_not_insert_when_list_is_null();
 	tearDown();
 	testEnded();
-	testStarted("test_should_get_index_of_search_element");
+	testStarted("test_should_ArrayList_get_index_of_search_element");
 	setup();
-		test_should_get_index_of_search_element();
+		test_should_ArrayList_get_index_of_search_element();
 	tearDown();
 	testEnded();
-	testStarted("test_should_get_minus_1_if_element_not_found");
+	testStarted("test_should_ArrayList_get_minus_1_if_element_not_found");
 	setup();
-		test_should_get_minus_1_if_element_not_found();
+		test_should_ArrayList_get_minus_1_if_element_not_found();
 	tearDown();
 	testEnded();
 	testStarted("test_iterator_hasNext_should_give_TRUE_when_element_is_present");
