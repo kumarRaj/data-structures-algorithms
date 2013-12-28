@@ -16,6 +16,6 @@ typedef struct {
 HashMap HashMap_createMap(hash hashFunc, compare compareKey);
 int HashMap_put(HashMap* map, void* key, void* value);
 void* HashMap_get(HashMap* map, void* key);
-int HashMap_removeKey(HashMap* map, void* kay);
+int HashMap_remove(HashMap* map, void* key);
 Iterator HashMap_keys(HashMap* map);
 #endif

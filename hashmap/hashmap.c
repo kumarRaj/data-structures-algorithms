@@ -4,7 +4,6 @@
 #include "internalHashMap.h"
 #include <stdlib.h>
 #include <stdio.h>
-int c = 0;
 void createListForEachBucket(void *bucket){
 	DoubleList list;
 	list  = dList_create();
@@ -18,9 +17,8 @@ HashMap HashMap_createMap(hash hashFunc, compare compareKey){
 	*(ArrayList*)map.buckets = buckets;
 	map.cmp = compareKey;
 	map.hashFunc = hashFunc;
-	for(i = 0;i < 10;i++){
+	for(i = 0;i < 10;i++)
 		ArrayList_add(map.buckets, malloc(sizeof(DoubleList)));
-	}
 	ArrayList_iterate(*(ArrayList*)map.buckets, createListForEachBucket);
 	return map;
 }
@@ -51,4 +49,21 @@ void* HashMap_get(HashMap *map, void *key){
 	hash_node = dList_getData(*list, key, map->cmp);
 	if(hash_node)	return hash_node->value;
 	return hash_node;
+}
+int HashMap_remove(HashMap* map, void* key){
+	int bucketNumber,index = 0;
+	DoubleList *list;Iterator it;
+	HashNode *hash_node;
+	bucketNumber = (map->hashFunc(key)) % 10;
+	list = (DoubleList*)ArrayList_get(map->buckets, bucketNumber);
+	it = dList_getIterator(list);
+	while(it.hasNext(&it)){
+		hash_node = it.next(&it);
+		if(0 == map->cmp(hash_node->key,key))
+			break;	
+		index++;
+	}
+	if(index == list->length)
+		return 0;
+	return dList_delete(list, index);
 }

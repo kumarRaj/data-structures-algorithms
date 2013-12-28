@@ -37,3 +37,14 @@ void test_get_not_found_data_in_hashmap(){
 	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
 	ASSERT(NULL == HashMap_get(&map, &prateek.key));
 }
+void test_remove_data_from_hashmap(){
+	HashMap map = HashMap_createMap(hashFun, areKeyEqual);
+	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
+	ASSERT(1 == HashMap_remove(&map, &raj.key));
+	ASSERT(NULL == HashMap_get(&map, &raj.key));
+}
+void test_remove_data_from_hashmap_when_data_not_present(){
+	HashMap map = HashMap_createMap(hashFun, areKeyEqual);
+	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
+	ASSERT(0 == HashMap_remove(&map, &prateek.key));
+}
