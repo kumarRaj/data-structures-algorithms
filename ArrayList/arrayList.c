@@ -90,7 +90,7 @@ Iterator ArrayList_getIterator(ArrayList* list){
     return it;
 }
 void ArrayList_iterate(ArrayList list, ForEach* forEach){
-    int result,index;
+    int index;
     for(index = 0;index < list.length ;index++){
         forEach(list.base[index]);
     }

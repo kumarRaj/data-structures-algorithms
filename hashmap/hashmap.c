@@ -4,21 +4,24 @@
 #include "internalHashMap.h"
 #include <stdlib.h>
 #include <stdio.h>
+int c = 0;
+void createListForEachBucket(void *bucket){
+	DoubleList list;
+	list  = dList_create();
+	*(DoubleList*)bucket = list;
+}
 HashMap HashMap_createMap(hash hashFunc, compare compareKey){
-	ArrayList buckets = ArrayList_create(10);
 	HashMap map;
 	int i;
-	DoubleList list;
+	ArrayList buckets = ArrayList_create(10);
 	map.buckets = malloc(sizeof(ArrayList));
 	*(ArrayList*)map.buckets = buckets;
 	map.cmp = compareKey;
-	(*(ArrayList*)map.buckets).length = 10;
 	map.hashFunc = hashFunc;
-	for(i=0;i<10;i++){
-		((ArrayList*)map.buckets)->base[i] = malloc(sizeof(DoubleList));
-		list = dList_create();
-		*(DoubleList*)(((ArrayList*)map.buckets)->base[i]) = list;
+	for(i = 0;i < 10;i++){
+		ArrayList_add(map.buckets, malloc(sizeof(DoubleList)));
 	}
+	ArrayList_iterate(*(ArrayList*)map.buckets, createListForEachBucket);
 	return map;
 }
 HashNode* HashMap_getHashNode(void *key, void *value){
