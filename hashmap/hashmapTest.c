@@ -21,6 +21,19 @@ Intern sumit = {15432,"Sumit"};
 void test_add_an_element_to_hashmap(){
 	HashMap map = HashMap_createMap(hashFun, areKeyEqual);
 	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
-	printf("%s\n", (char*)HashMap_get(&map, &raj.key));
-	// ASSERT(0 == strcmp();
+	ASSERT(0 == strcmp(raj.value,(char*)HashMap_get(&map, &raj.key)));
+}
+void test_add_multiple_elements_to_hashmap(){
+	HashMap map = HashMap_createMap(hashFun, areKeyEqual);
+	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
+	ASSERT(HashMap_put(&map, &prateek.key, &prateek.value));
+	ASSERT(HashMap_put(&map, &sumit.key, &sumit.value));
+	ASSERT(0 == strcmp(raj.value,(char*)HashMap_get(&map, &raj.key)));
+	ASSERT(0 == strcmp(prateek.value,(char*)HashMap_get(&map, &prateek.key)));
+	ASSERT(0 == strcmp(sumit.value,(char*)HashMap_get(&map, &sumit.key)));
+}
+void test_get_not_found_data_in_hashmap(){
+	HashMap map = HashMap_createMap(hashFun, areKeyEqual);
+	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
+	ASSERT(NULL == HashMap_get(&map, &prateek.key));
 }

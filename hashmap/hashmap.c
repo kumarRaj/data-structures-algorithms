@@ -24,22 +24,24 @@ HashMap HashMap_createMap(hash hashFunc, compare compareKey){
 	ArrayList_iterate(*(ArrayList*)map.buckets, createListForEachBucket);
 	return map;
 }
-HashNode* HashMap_getHashNode(void *key, void *value){
+HashNode* HashMap_createHashNode(void *key, void *value){
 	HashNode *hash_node = malloc(sizeof(HashNode));
 	hash_node->key = key;
 	hash_node->value = value;
 	return hash_node;
 }
+
 int HashMap_put(HashMap *map, void *key, void *value){
 	DoubleList *list;
 	HashNode *hash_node;
 	int bucketNumber;
 	bucketNumber = (map->hashFunc(key)) % 10;
-	hash_node = HashMap_getHashNode(key, value);
+	hash_node = HashMap_createHashNode(key, value);
 	list = (DoubleList*)ArrayList_get(map->buckets, bucketNumber);
 	dList_insert(list, list->length, hash_node);
 	return 1;
 }
+
 void* HashMap_get(HashMap *map, void *key){
 	int bucketNumber;
 	DoubleList *list;
@@ -47,5 +49,6 @@ void* HashMap_get(HashMap *map, void *key){
 	bucketNumber = (map->hashFunc(key)) % 10;
 	list = (DoubleList*)ArrayList_get(map->buckets, bucketNumber);
 	hash_node = dList_getData(*list, key, map->cmp);
-	return hash_node->value;
+	if(hash_node)	return hash_node->value;
+	return hash_node;
 }
