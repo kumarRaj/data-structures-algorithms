@@ -48,3 +48,10 @@ void test_remove_data_from_hashmap_when_data_not_present(){
 	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
 	ASSERT(0 == HashMap_remove(&map, &prateek.key));
 }
+void test_keys_of_hashmap_gives_all_keys_in_map(){
+	HashMap map = HashMap_createMap(hashFun, areKeyEqual);
+	Iterator it;
+	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
+	it = HashMap_keys(&map);
+	ASSERT(15388 == *(int*)it.next(&it));
+}

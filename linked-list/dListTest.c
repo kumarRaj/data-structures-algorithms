@@ -230,20 +230,20 @@ void test_hasnext_of_getiterator_gives_true_if_list_not_empty(){
 	it = dList_getIterator(&dList);
 	ASSERT(1 == it.hasNext(&it));
 }
-void test_hasnext_of_getiterator_gives_false_if_list_not_empty(){
+void test_hasnext_of_getiterator_gives_false_if_list_empty(){
 	DoubleList dList = dList_create();
 	Iterator it;
 	it = dList_getIterator(&dList);
 	ASSERT(0 == it.hasNext(&it));
 }
-void test_next_of_getiterator_gives_next_data(){
+void test_next_of_getiterator_gives_next_data(){	
 	DoubleList dList = dList_create();
 	Iterator it;
 	int number1 = 5;
 	dList_insert(&dList, 0, &number1);
 	it = dList_getIterator(&dList);
 	if(it.hasNext(&it))
-	ASSERT(5 == *(int*)it.next(&it));
+		ASSERT(5 == *(int*)it.next(&it));
 }
 void test_should_give_all_values_using_iterator(){
 	DoubleList dList = dList_create();

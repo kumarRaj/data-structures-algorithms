@@ -60,10 +60,21 @@ int HashMap_remove(HashMap* map, void* key){
 	while(it.hasNext(&it)){
 		hash_node = it.next(&it);
 		if(0 == map->cmp(hash_node->key,key))
-			break;	
+		 	break;	
 		index++;
 	}
 	if(index == list->length)
 		return 0;
 	return dList_delete(list, index);
+}
+
+
+Iterator HashMap_keys(HashMap *map){
+	Iterator it;
+	DoubleList list;
+	int bucketNumber = 0;
+	it = ArrayList_getIterator((ArrayList*)map->buckets);
+	while(it.hasNext(&it)){
+		list = *(DoubleList*)ArrayList_get(map->buckets, bucketNumber);
+	}
 }

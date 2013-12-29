@@ -134,9 +134,9 @@ int main(){
 		test_hasnext_of_getiterator_gives_true_if_list_not_empty();
 	tearDown();
 	testEnded();
-	testStarted("test_hasnext_of_getiterator_gives_false_if_list_not_empty");
+	testStarted("test_hasnext_of_getiterator_gives_false_if_list_empty");
 	setup();
-		test_hasnext_of_getiterator_gives_false_if_list_not_empty();
+		test_hasnext_of_getiterator_gives_false_if_list_empty();
 	tearDown();
 	testEnded();
 	testStarted("test_next_of_getiterator_gives_next_data");
