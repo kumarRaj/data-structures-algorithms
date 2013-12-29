@@ -99,6 +99,11 @@ int main(){
 		test_search_root_element_in_tree();
 	tearDown();
 	testEnded();
+	testStarted("test_search_element_in_tree");
+	setup();
+		test_search_element_in_tree();
+	tearDown();
+	testEnded();
 	testStarted("test_search_element_if_element_not_present");
 	setup();
 		test_search_element_if_element_not_present();
