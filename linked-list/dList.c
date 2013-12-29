@@ -12,48 +12,31 @@ DoubleList dList_create(){
 	DoubleList dList = {0,NULL,NULL};
 	return dList;
 }
+int dlist_insertAtFirst(DoubleList *dList,void *element){
+	node *newNode = dList_createNode(NULL, element, dList->head);
+    dList->head = newNode;
+	if(dList->length != 0)	dList->head->previous = newNode;
+    dList->length++;
+	return 1;
+}
 int dList_insert(DoubleList *dList, int index, void *element){
     int i;
     node *temp,*newNode;
     if(index > dList->length)	return 0;
     temp = dList->head;
-    // if(index == 0){
-    //     newNode = dList_createNode(NULL, element, dList->head);
-    //     dList->head = newNode;
-    //     dList->length++;
-    // 	if(dList->length != 0)	dList->head->previous = newNode;
-    // 	return 1;
-    // }
-    for (i = 0; i < index ; ++i){
+    if(index == 0) 	return dlist_insertAtFirst(dList,element);
+    for (i = 0; i < index ; ++i)
         if(temp->next != NULL)	temp = temp->next;
-    }
-
-    if(i == 0 && dList->length == 0){
-        newNode = dList_createNode(NULL,element, NULL);
-        dList->head = newNode;
-        dList->length++;
-        return 1;
-    }
-    if(index == 0){
-        newNode = dList_createNode(NULL, element, dList->head);
-        dList->head->previous = newNode;
-        dList->head = newNode;
-        dList->length++;
-        return 1;
-    }
-
     if(i == dList->length){
         newNode = dList_createNode(temp,element,NULL);
         temp->next = newNode;
-        dList->length++;
-        return 1;
     }
     else{
 	    newNode = dList_createNode(temp->previous,element, temp);
 	    temp->previous->next = newNode;
-	    dList->length++;
-	    return 1;
     }
+    dList->length++;
+    return 1;
 }
 int dList_delete(DoubleList *dList, int index){
 	int i;
