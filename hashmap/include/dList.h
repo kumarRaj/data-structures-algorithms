@@ -1,4 +1,5 @@
 #include "iterator.h"
+
 #ifndef _DOUBLELIST_
 #define _DOUBLELIST_
 
@@ -16,9 +17,7 @@ typedef struct{
 #ifndef _COMPARE_
 #define _COMPARE_
 typedef int (*compare)(void *elementToCompare,void *element);
-#endif	
-
-
+#endif
 DoubleList dList_create();
 int dList_insert(DoubleList* dList,int index,void *element);
 int dList_delete(DoubleList* dList,int index);
