@@ -78,7 +78,6 @@ void test_delete_first_element_in_list_with_one_element(){
 	dList_insert(&dlist, 0, &number1);
 	ASSERT(dList_delete(&dlist, 0));
 	ASSERT(0 == dlist.length);
-	ASSERT(NULL == dlist.head);
 }
 void test_delete_first_element(){
 	DoubleList dlist = dList_create();
@@ -193,11 +192,8 @@ void test_sort_on_dList_should_sort_list(){
 	dList_insert(&expected, 0, &nums[2]);
 	dList_insert(&expected, 1, &nums[1]);
 	dList_insert(&expected, 2, nums);
-	view_list_details(dList);
-	view_list_details(expected);
-
 	dList_sort(dList, compareInt);
-	// compare_lists(expected, dList, compareInt);
+	compare_lists(expected, dList, compareInt);
 }
 int cmp(void *elementToCompare,void *element){
 	Account accToCompare = *(Account*)elementToCompare;

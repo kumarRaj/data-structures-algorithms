@@ -23,8 +23,8 @@ int dList_insert(DoubleList *dList, int index, void *element){
     int i;
     node *temp,*newNode;
     if(index > dList->length)	return 0;
-    temp = dList->head;
     if(index == 0) 	return dlist_insertAtFirst(dList,element);
+    temp = dList->head;
     for (i = 0; i < index ; ++i)
         if(temp->next != NULL)	temp = temp->next;
     if(i == dList->length){
@@ -38,35 +38,32 @@ int dList_insert(DoubleList *dList, int index, void *element){
     dList->length++;
     return 1;
 }
+void dList_deleteAtStart(DoubleList *dList,node *temp){
+	if(dList->length != 1)
+		dList->head = temp->next;
+	else dList->head = NULL;
+}
+void dList_deleteInBetween(DoubleList *dList,node *temp,int position){
+	if(position == dList->length - 1)
+		temp->previous->next = NULL;
+	else{
+		temp->previous->next = temp->next;
+		temp->next->previous = temp->previous;
+	}
+}
 int dList_delete(DoubleList *dList, int index){
-	int i;
+	int position;
 	node *temp;
 	if(index > dList->length)
 		return 0;
 	temp = dList->head;
-	for (i = 0; i < index && i < dList->length ; ++i){
-			temp = temp->next;
+	for(position = 0; position < index; ++position){
+		temp = temp->next;
 	}
-	if(i == 0 && dList->length == 1){
-		dList->head = NULL;
-		free(temp);
-		dList->length--;
-		return 1;
+	if(index == 0){
+		dList_deleteAtStart(dList,temp);
 	}
-	if(i == 0){
-		dList->head = temp->next;
-		free(temp);
-		dList->length--;
-		return 1;
-	}
-	if(i == dList->length - 1){
-		temp->previous->next = NULL;
-		free(temp);
-		dList->length--;
-		return 1;
-	}
-	temp->previous->next = temp->next;
-	temp->next->previous = temp->previous;
+	else dList_deleteInBetween(dList,temp,position);
 	free(temp);
 	dList->length--;
 	return 1;
