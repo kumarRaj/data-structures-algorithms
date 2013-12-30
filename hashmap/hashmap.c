@@ -84,10 +84,19 @@ void HashMap_keys(HashMap *map){
 		}
 	}
 }
-
-// Iterator HashMap_keys(HashMap *map){
-// 	Iterator it;
+typedef struct{
+	Iterator bucket;
+	Iterator list;
+} Position;
+// void setPosition(HashMap *map,Position *position){
+// 	position->bucket = ArrayList_getIterator(map->buckets);
+// 	position->list = position->bucket()
+// }
+// Iterator HashMap_Iterator(HashMap *map){
+// 	Iterator HashMapIterator;
 // 	DoubleList list;
 // 	int bucketNumber = 0;
-
+// 	HashMapIterator.list = map->buckets;
+// 	HashMapIterator.position = malloc(sizeof(Position));
+// 	setPosition(map,HashMapIterator.position);
 // }

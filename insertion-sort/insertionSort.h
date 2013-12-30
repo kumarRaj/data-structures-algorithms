@@ -1,14 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
+#include <stddef.h>
 
-typedef char string[20];
 
-typedef struct {
-	string name;
-	int accountNumber;
-	float balance;
-} Account;
 
+#ifndef _COMPARE_
+#define _COMPARE_
 typedef int (*compare)(void* first, void* second);
+#endif
 void isort(void* base, size_t numberOfElements, size_t elementSize,compare comp);

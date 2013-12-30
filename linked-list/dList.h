@@ -14,8 +14,10 @@ typedef struct{
 	node *head,*tail;
 } DoubleList;
 
-
+#ifndef _COMPARE_
+#define _COMPARE_
 typedef int (*compare)(void *elementToCompare,void *element);
+#endif
 
 DoubleList dList_create();
 int dList_insert(DoubleList* dList,int index,void *element);

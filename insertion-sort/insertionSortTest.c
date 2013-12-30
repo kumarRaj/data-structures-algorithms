@@ -3,7 +3,13 @@
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
+typedef char string[20];
 
+typedef struct {
+    string name;
+    int accountNumber;
+    float balance;
+} Account;
 int compareAccounts(void* first, void* second) {
 	Account* firstAccount = (Account*)first;
 	Account* secondAccount = (Account*)second;
