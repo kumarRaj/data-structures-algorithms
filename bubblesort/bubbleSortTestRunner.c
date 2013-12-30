@@ -59,6 +59,11 @@ int main(){
 		test_sorts_characters();
 	tearDown();
 	testEnded();
+	testStarted("test_should_sort_data_");
+	setup();
+		test_should_sort_data_();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
