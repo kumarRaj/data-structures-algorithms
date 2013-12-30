@@ -25,7 +25,7 @@ void msort(void **base, size_t length, compare cmpFun){
 		return;
 	mid = (length + 1)/2;
 	leftArray = malloc(sizeof(void*) * mid);
-	rightArray = malloc(sizeof(void*) * (length-mid));
+	rightArray = malloc(sizeof(void*) * (mid));
 	for(i = 0;i < mid; i++){
 		leftArray[i] = base[i];
 	}
