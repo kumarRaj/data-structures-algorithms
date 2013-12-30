@@ -13,24 +13,29 @@ void merge(void **leftArray,void **rightArray,int length,compare cmpFun,void **r
 	while(i < length)
 		resultArray[k++] = leftArray[i++];
 	while(j < length)
-		resultArray[k++] = leftArray[i++];
+		resultArray[k++] = rightArray[j++];
 }
 int j = 0;
 void msort(void **base, size_t length, compare cmpFun){
 	int i;
-	int mid = (length + 1)/2;
-	void **leftArray = malloc(sizeof(void*) * mid);
-	void **rightArray = malloc(sizeof(void*) * mid);
-	for(i = 0;i < mid;++i){
+	int mid;
+	void **leftArray;
+	void **rightArray;
+	if(length < 2)
+		return;
+	mid = (length + 1)/2;
+	leftArray = malloc(sizeof(void*) * mid);
+	rightArray = malloc(sizeof(void*) * (length-mid));
+	for(i = 0;i < mid; i++){
 		leftArray[i] = base[i];
-		rightArray[i] = base[i + mid];
 	}
-	if(length != 1){
-		msort(leftArray, mid, cmpFun);
-		msort(rightArray, length, cmpFun);
-		merge(leftArray, rightArray, mid, cmpFun, base);
+	for(i = mid ; i < length ; i++){
+		rightArray[i-mid] = base[i];
 	}
-	else return;
+	msort(leftArray, mid, cmpFun);
+	msort(rightArray, length - mid, cmpFun);
+	merge(leftArray, rightArray, mid, cmpFun, base);
+	
 	free(leftArray);
 	free(rightArray);
 }
