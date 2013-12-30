@@ -72,31 +72,17 @@ int HashMap_remove(HashMap* map, void* key){
 	return dList_delete(list, index);
 }
 
-void HashMap_keys(HashMap *map){
+Iterator HashMap_keys(HashMap *map){
 	Iterator Arrayiterator = ArrayList_getIterator(map->buckets);
 	Iterator listIterator;
 	HashNode hash_node;
+	DoubleList *dList = malloc(sizeof(DoubleList));
 	while(Arrayiterator.hasNext(&Arrayiterator)){
 		listIterator = dList_getIterator(Arrayiterator.next(&Arrayiterator));
 		while(listIterator.hasNext(&listIterator)){
 			hash_node = *(HashNode*)listIterator.next(&listIterator);
-			printf("%s\n", hash_node.value);
+			dList_insert(dList, dList->length, hash_node.key);
 		}
 	}
+	return dList_getIterator(dList);
 }
-typedef struct{
-	Iterator bucket;
-	Iterator list;
-} Position;
-// void setPosition(HashMap *map,Position *position){
-// 	position->bucket = ArrayList_getIterator(map->buckets);
-// 	position->list = position->bucket()
-// }
-// Iterator HashMap_Iterator(HashMap *map){
-// 	Iterator HashMapIterator;
-// 	DoubleList list;
-// 	int bucketNumber = 0;
-// 	HashMapIterator.list = map->buckets;
-// 	HashMapIterator.position = malloc(sizeof(Position));
-// 	setPosition(map,HashMapIterator.position);
-// }

@@ -54,5 +54,8 @@ void test_keys_of_hashmap_gives_all_keys_in_map(){
 	ASSERT(HashMap_put(&map, &raj.key, &raj.value));
 	ASSERT(HashMap_put(&map, &prateek.key, &prateek.value));
 	ASSERT(HashMap_put(&map, &sumit.key, &sumit.value));
-	HashMap_keys(&map);
+	it = HashMap_keys(&map);
+	ASSERT(15432 == *(int*)it.next(&it));
+	ASSERT(15386 == *(int*)it.next(&it));
+	ASSERT(15388 == *(int*)it.next(&it));
 }
