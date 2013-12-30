@@ -49,6 +49,6 @@ void test_should_sort_data_(){
     Account account[] = {{"ram",500,1},{"sham",200,3}};
     void *AccountPtrs[] = {&account[0],&account[1]};
     bubbleSort(AccountPtrs, 2, compareAccounts);
-    ASSERT(account[0].accountNumber == 500);
-    ASSERT(account[1].accountNumber == 200);            
+    ASSERT((*(Account*)AccountPtrs[0]).accountNumber == 200);
+    ASSERT((*(Account*)AccountPtrs[1]).accountNumber == 500);
 }
