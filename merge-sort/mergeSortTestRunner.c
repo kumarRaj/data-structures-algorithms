@@ -49,9 +49,14 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_split_arrays_left_and_right");
+	testStarted("test_join_2_arrays_in_sorted_order");
 	setup();
-		test_split_arrays_left_and_right();
+		test_join_2_arrays_in_sorted_order();
+	tearDown();
+	testEnded();
+	testStarted("test_sort_array");
+	setup();
+		test_sort_array();
 	tearDown();
 	testEnded();
 

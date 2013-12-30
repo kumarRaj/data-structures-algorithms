@@ -25,10 +25,6 @@ void msort(void **base, size_t length, compare cmpFun){
 		leftArray[i] = base[i];
 		rightArray[i] = base[i + mid];
 	}
-	// printf("%d\n",length);
-	// j++;
-	// if(j == 8)
-	// 	exit(1);
 	if(length != 1){
 		msort(leftArray, mid, cmpFun);
 		msort(rightArray, length, cmpFun);
@@ -37,8 +33,4 @@ void msort(void **base, size_t length, compare cmpFun){
 	else return;
 	free(leftArray);
 	free(rightArray);
-}
-
-void mergeSort(void **base, size_t numberOfElements, compare cmpFun){
-	// sort(base,0,numberOfElements);
 }

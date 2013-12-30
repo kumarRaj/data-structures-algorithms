@@ -5,9 +5,9 @@
 int compareArray(void **ar1,void **ar2,int length){
 	int i;
 	for(i = 0;i < length;i++){
-		printf("%d\t%d\t\n", *(int*)ar1[i],*(int*)ar2[i]);
-		// if(ar1[i] != ar2[i])
-		// 	return 0;
+		// printf("%d\t%d\t\n", *(int*)ar1[i],*(int*)ar2[i]);
+		if(ar1[i] != ar2[i])
+			return 0;
 	}
 	return 1;
 }
