@@ -49,14 +49,24 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_join_2_arrays_in_sorted_order");
+	testStarted("test_sort_array_for_even_number_of_elements");
 	setup();
-		test_join_2_arrays_in_sorted_order();
+		test_sort_array_for_even_number_of_elements();
 	tearDown();
 	testEnded();
-	testStarted("test_sort_array");
+	testStarted("test_sort_array_for_odd_number_of_elements");
 	setup();
-		test_sort_array();
+		test_sort_array_for_odd_number_of_elements();
+	tearDown();
+	testEnded();
+	testStarted("test_should_sort_data_of_2_structs");
+	setup();
+		test_should_sort_data_of_2_structs();
+	tearDown();
+	testEnded();
+	testStarted("test_sorts_characters");
+	setup();
+		test_sorts_characters();
 	tearDown();
 	testEnded();
 

@@ -2,8 +2,8 @@
 
 #ifndef _COMPARE_
 #define _COMPARE_
-typedef int (*compare)(void* firstElement, void* secondElement);
-typedef int (*hash)(void *key);
+	typedef int (*compare)(void* firstElement, void* secondElement);
+	typedef int (*hash)(void *key);
 #endif	
 #ifndef _HASHMAP_
 #define _HASHMAP_
