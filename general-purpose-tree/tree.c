@@ -65,32 +65,32 @@ Iterator getChildren(Tree* tree, void *parent) {
 	it.next = &treeNext;
 	return it;
 }
-// int deleteFromTree(Tree *tree, void *data){
-// 	TreeNode *root = (TreeNode*)tree->root;
-// 	TreeNode *tn,*parent;
-// 	Iterator it;
-// 	tn = getTreeNode(root->children, data, tree->cmp);
-// 	if(NULL == tn) return 0;
-// 	if(0 == tn->children.length){
-// 		parent = tn->parent;
-// 		it = dList_getIterator(&parent->children);
-// 		while(it.hasNext(&it)){
-// 			if(tree->cmp(data,it.next(&it)))
-// 				break;
-// 		}
-// 		dList_delete(&parent->children, it.position - 1);
-// 		return 1;
-// 	}
-// 	return 0;
-// }
+int deleteFromTree(Tree *tree, void *data){
+	TreeNode *root = (TreeNode*)tree->root;
+	TreeNode *tn,*parent;
+	Iterator it;int deleteIndex = 0;
+	tn = getTreeNode(root->children, data, tree->cmp);
+	if(NULL == tn) return 0;
+	if(0 == tn->children.length){
+		parent = tn->parent;
+		it = dList_getIterator(&parent->children);
+		while(it.hasNext(&it)){
+			deleteIndex++;
+			if(tree->cmp(data,it.next(&it)))
+				break;
+		}
+		if(deleteIndex == 0 || deleteIndex == *((DoubleList*)(it.list))->length)
+		dList_delete(&parent->children, it.position - 1);
+		return 1;
+	}
+	return 0;
+}
 int searchInTree(Tree* tree, void* searchElement){
     TreeNode* root = (TreeNode*)(tree->root);
     if(0 == tree->cmp(searchElement,root->data)){
-    	// printf("1\n");
     	return 1;
     }
     if(getTreeNode(root->children,searchElement,tree->cmp))
-    	// printf("2\n");
         return 1;
     return 0;
 }
