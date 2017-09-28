@@ -6,10 +6,6 @@ brackets = {'(':')',
 		'[':']',
 		'{':'}'}
 
-bracketCount = {'(':0,
-		'[':0,
-		'{':0}
-
 def getExpectation(input):
 	return brackets.get(input, '');
 
