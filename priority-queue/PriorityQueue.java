@@ -27,6 +27,7 @@ class PriorityQueue {
         System.out.println(x);
         x.dequeue();
         x.dequeue();
+        System.out.println(x);
         x.dequeue();
         x.dequeue();
         x.dequeue();
@@ -56,9 +57,9 @@ class PriorityQueue {
 
     public Object dequeue(){
         if (l.size() == 0){
-            return null;
+            return Optional.empty();
         }
-        return l.remove();
+        return Optional.of(l.remove());
     }
 
 
