@@ -28,15 +28,35 @@ class Heap {
     	return (index - 1)/2;
     }
 
+    private boolean hasParent(int index) {
+        return getParent(index) >= 0;
+    }
+
+    private boolean hasLeftChild(int index){
+        return getLeftIndex(index) < size;
+    }
+
+    private boolean hasRightChild(){
+        return getRightIndex(index) < size;
+    }
+
+    private int getLeftIndex(int index) {
+        return 2 * index + 1;
+    }
+
+    private int getRightIndex(int index) {
+        return 2 * index + 2;
+    }
+
     public boolean enqueue(Object element, int priority){
         int currentIndex = size;
         data[size++] = new Node(element, priority);
-        int parent = getParent(currentIndex)
         while (parent != 0) {
-            if (priority < data[parent].priority){
+            int parent = getParent(currentIndex);
+            if (priority < data[parent--].priority){
                 swap(currentIndex, parent);
                 currentIndex = parent;
-            }
+            } else {}
         }
     	return true;
     }
@@ -50,6 +70,19 @@ class Heap {
     public Object dequeue(){
     	Node temp = data[0];
     	data[0] = data[--size];
+        int currentIndex = 0;
+
+        while(hasLeftChild(currentIndex)){
+            if (data[currentIndex].priority < data[getLeftIndex(currentIndex)].priority){
+                break;
+            }
+            int indexToSwap = getLeftIndex(currentIndex);
+            if (hasRightChild() && data[getLeftIndex(currentIndex)].priority > data[getRightIndex(currentIndex)].priority) {
+                indexToSwap = getRightIndex(currentIndex);
+            }
+            swap(currentIndex, indexToSwap);
+            currentIndex = indexToSwap;
+        }
     	return temp;
     }
 

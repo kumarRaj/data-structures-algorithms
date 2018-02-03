@@ -16,6 +16,10 @@
 *.exe
 *.out
 *.app
+*.class
+*.DS_Store
+*.xml
+*.iml
 
 #Others
 *todo*
