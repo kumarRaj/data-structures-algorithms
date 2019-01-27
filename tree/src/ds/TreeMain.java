@@ -1,17 +1,16 @@
 package ds;
 
+import ds.BTreePrinter;
+import ds.BinarySearchTree;
+import ds.Node;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * Copyright 2018 Jubilant FoodWorks Limited . All Rights Reserved.
- * Jubilant FoodWorks PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
-
 public class TreeMain {
     public static void main(String[] args) {
-        BinaryTree binaryTree = newRandomTree();
+        BinarySearchTree binaryTree = newRandomTree();
 //        binaryTree.add(4);
 //        binaryTree.add(3);
 //        binaryTree.add(5);
@@ -25,11 +24,11 @@ public class TreeMain {
         BTreePrinter.printNode(binaryTree.getHead());
     }
 
-    private static BinaryTree newRandomTree() {
-        BinaryTree binaryTree = new BinaryTree();
+    private static BinarySearchTree newRandomTree() {
+        BinarySearchTree binaryTree = new BinarySearchTree();
         Random random = new Random();
-        for (int i = 0; i < 6; i++) {
-            binaryTree.add(random.nextInt(400));
+        for (int i = 0; i < 10; i++) {
+            binaryTree.add(random.nextInt(100));
         }
         return binaryTree;
     }
